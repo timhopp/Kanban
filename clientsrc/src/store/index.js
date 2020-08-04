@@ -65,9 +65,7 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
-    addList({commit, dispatch}, newList){
-      api.post('boards', )
-    },
+  
    async setActiveBoard({ commit, dispatch}, boardId){
       // let activeBoard = this.state.boards.find(board => boardId == board.id)
       try {
@@ -76,11 +74,20 @@ export default new Vuex.Store({
      } catch(error){
        console.error(error)
      }
-    }
+    },
     //#endregion
 
 
     //#region -- LISTS --
+    addList({commit, dispatch}, newList){
+      api.post('boards', )
+    },
+
+
+
+    //#endregion
+
+    //#region --  COMMENTS --
 
 
 
