@@ -1,8 +1,7 @@
 <template>
   <div class="List">
     <div class="bg-dark text-white border rounded">
-      <div>{{list.title}}</div>
-
+      <div>hello{{list.title}}</div>
     </div>
   </div>
 </template>
@@ -10,17 +9,17 @@
 
 <script>
 export default {
-  name: 'List',
-  data(){
-    return {}
+  name: "List",
+  props: ["list"],
+  data() {
+    return {};
   },
-  computed:{},
-  methods:{},
-  components:{}
-}
+  computed: {},
+  methods: {},
+  components: {},
+};
 </script>
 
 
 <style scoped>
-
 </style>

@@ -14,7 +14,7 @@ export class ListsController extends BaseController {
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
-      .get('/:listId/tasks', this.getTasksByBoard)
+      .get('/:listId/tasks', this.getTasksByList)
   }
 
   async create(req, res, next) {
@@ -48,7 +48,7 @@ export class ListsController extends BaseController {
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }
-  async getTasksByBoard(req, res, next) {
+  async getTasksByList(req, res, next) {
     try {
       let data = await tasksService.getByListId(req.params.listId, req.userInfo.email)
       return res.send(data)
