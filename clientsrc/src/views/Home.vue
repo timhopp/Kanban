@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>Welcome, {{user.name}}.</h1>
+    <img class="rounded" :src="user.picture" alt="" />
+    <h1>Welcome, {{user.name}}</h1>
   </div>
 </template>
 
