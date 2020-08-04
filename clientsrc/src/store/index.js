@@ -28,7 +28,7 @@ export default new Vuex.Store({
     setBoards(state, boards) {
       state.boards = boards
     },
-    setActiveBoard(state, activeBoard){
+    setActiveBoard(state, activeBoard) {
       state.activeBoard = activeBoard
     }
   },
@@ -42,7 +42,6 @@ export default new Vuex.Store({
     },
     async getProfile({ commit }) {
       try {
-        debugger
         let res = await api.get("/profile")
         commit("setUser", res.data)
       } catch (err) {
@@ -65,22 +64,22 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
-  
-   async setActiveBoard({ commit, dispatch}, boardId){
+
+    async setActiveBoard({ commit, dispatch }, boardId) {
       // let activeBoard = this.state.boards.find(board => boardId == board.id)
       try {
         let res = await api.get('boards/' + boardId)
         commit('setActiveBoard', res.data)
-     } catch(error){
-       console.error(error)
-     }
+      } catch (error) {
+        console.error(error)
+      }
     },
     //#endregion
 
 
     //#region -- LISTS --
-    addList({commit, dispatch}, newList){
-      api.post('boards', )
+    addList({ commit, dispatch }, newList) {
+      api.post('boards',)
     },
 
 

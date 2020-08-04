@@ -1,9 +1,9 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
 import auth0provider from "@bcwdev/auth0provider";
-import { profilesService } from "../services/ProfilesService";
+import { profilesService } from "../services/ProfileService";
 
-export class ProfilesController extends BaseController {
+export class ProfileController extends BaseController {
   constructor() {
     super("api/profile");
     this.router
