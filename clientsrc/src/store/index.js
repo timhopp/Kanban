@@ -146,6 +146,13 @@ export default new Vuex.Store({
       })
     },
 
+    deleteComment({commit, dispatch}, payload){
+      api.delete("tasks/" + payload.theTaskId + "/comments/" + payload.theCommentId)
+      .then(serverList => {
+        dispatch('getAllTasks')
+      })
+    },
+
     // getComments({ commit, dispatch}, taskId){
     //   try{
     //     let foundTask = this.$state.tasks.find(task => task.id == taskId)
