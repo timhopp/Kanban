@@ -2,6 +2,10 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class TasksService {
+
+  async getAll(userEmail) {
+    return await dbContext.Tasks.find({ creatorEmail: userEmail }).populate("creator", "name picture")
+  }
   async getByListId(id, userEmail) {
     let data = await dbContext.Tasks.find({ listId: id, creatorEmail: userEmail });
     if (!data) {

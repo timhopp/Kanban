@@ -9,6 +9,7 @@ export class TasksController extends BaseController {
     this.router
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .use(auth0provider.getAuthorizedUserInfo)
+      .get('', this.getAll)
       .get('/:id', this.getById)
       .post('', this.create)
       .put('/:id', this.edit)
@@ -17,6 +18,14 @@ export class TasksController extends BaseController {
       .post("/:id/comments", this.addComment)
   }
 
+  async getAll(req, res, next) {
+    try {
+      //only gets boards by user who is logged in
+      let data = await tasksService.getAll(req.userInfo.email)
+      return res.send(data)
+    }
+    catch (err) { next(err) }
+  }
   async create(req, res, next) {
     try {
       req.body.creatorEmail = req.userInfo.email

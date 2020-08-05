@@ -113,10 +113,9 @@ export default new Vuex.Store({
     //#endregion
     //#region --  TASKS --
     addTask({commit, dispatch}, taskData) {
-      debugger
       api.post('tasks', taskData)
       .then(serverList => {
-        dispatch('getTasksByListId', taskData.listId)
+        dispatch('getAllTasks')
       })
     },
     async getTasksByListId({ commit, dispatch }, id) {
@@ -127,12 +126,32 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async getAllTasks({ commit, dispatch}){
+      try{
+        let res = await api.get('tasks')
+        commit('setTasks', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
 
 
     //#endregion
 
     //#region --  COMMENTS --
+     addComment({ commit, dispatch}, payload){
+       api.post("tasks/" + payload.taskId + "/comments", payload)
+       .then(serverList => {
+        dispatch('getAllTasks')
+      })
+    },
 
+    // getComments({ commit, dispatch}, taskId){
+    //   try{
+    //     let foundTask = this.$state.tasks.find(task => task.id == taskId)
+    //     let res = foundTask.comments
+    //   }
+    // }
 
 
     //#endregion
