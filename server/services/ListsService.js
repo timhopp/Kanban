@@ -8,12 +8,13 @@ class ListsService {
   }
 
 
-  async getById(id, userEmail) {
-    let data = await dbContext.Lists.findOne({ _id: id, creatorEmail: userEmail })
+  async getById(id) {
+    let data = await dbContext.Lists.findOne({ _id: id})
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this board")
     }
     return data
+    // , creatorEmail: userEmail 
   }
   async create(rawData) {
     let data = await dbContext.Lists.create(rawData)
@@ -35,8 +36,8 @@ class ListsService {
     }
   }
 
-  async getByBoardId(id, userEmail) {
-    let data = await dbContext.Lists.find({ boardId: id, creatorEmail: userEmail });
+  async getByBoardId(id) {
+  let data = await dbContext.Lists.find( {boardId: id} );
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this board.");
     }

@@ -1,8 +1,8 @@
 <template>
   <div class="board">
     <h1>{{board.title}}</h1>
-    <form>
-      <div @submit.prevent="addList" class="form-group">
+    <form @submit.prevent="addList">
+      <div  class="form-group">
         <label for="exampleInputEmail1">Create A List</label>
         <input
           v-model="newList.title"
@@ -15,11 +15,12 @@
       <Button type="submit" class="btn btn-block btn-warning">Submit List</Button>
     </form>
     <div class="row">
-      <List
+      <list
         class="car col-4 border rounded mb-3 square bg-info text-light"
-        v-for="list in lists"
-        :key="list.id"
-      ></List>
+        v-for="listItem in lists"
+        :list="listItem"
+        :key="listItem.id"
+      ></list>
     </div>
   </div>
 </template>
@@ -29,14 +30,15 @@
 import List from "../components/List";
 export default {
   name: "board",
-  props: ["boardId"],
+  props: ["boardId",
+  "list"
+  ],
   data() {
     return {
       newList: {},
     };
   },
   mounted() {
-    debugger;
     this.$store.dispatch("getListsByBoardId", this.$route.params.boardId);
   },
   computed: {
@@ -49,10 +51,12 @@ export default {
   },
   methods: {
     addList() {
+      
       this.$store.dispatch("addList", {
         title: this.newList.title,
-        id: this.$store.state.activeBoard.id,
+        boardId: this.$route.params.boardId,
       });
+      console.log(this.newList.title, this.$route.params.boardId)
     },
   },
   components: {
