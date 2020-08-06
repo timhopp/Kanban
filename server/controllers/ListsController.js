@@ -15,6 +15,7 @@ export class ListsController extends BaseController {
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
       .get('/:listId/tasks', this.getTasksByList)
+      .delete('/:listId/tasks', this.deleteTasksByListId)
   }
 
   async create(req, res, next) {
@@ -55,6 +56,16 @@ export class ListsController extends BaseController {
       return res.send(data)
     } catch (error) {
       next(error)
+    }
+  }
+
+  async deleteTasksByListId(req, res, next) {
+    try {
+      req.body.creatorEmail = req.userInfo.email
+      await tasksService.delete(req.params.id, req.userInfo.email)
+      return res.send("Deleted tasks for this list")
+    } catch (error) {
+
     }
   }
 

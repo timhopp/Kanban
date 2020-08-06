@@ -2,21 +2,22 @@
   <div class="Task">
     <div class="bg-secondary text-white border rounded">
       <div>Task{{task.title}}</div>
+      <button @click="deleteTask(task._id)" class="btn btn-danger">Delete</button>
       <form @submit.prevent="addComment(task.id)">
-      <div  class="form-group">
-        <label for="exampleInputEmail1">Add Comment</label>
-        <input
-          v-model="newComment.content"
-          type="text"
-          class="form-control"
-          id="createcomment"
-          placeholder="Enter Comment"
-        />
-      </div>
-      <Button type="submit" class="btn btn-block btn-warning">Add</Button>
-    </form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Add Comment</label>
+          <input
+            v-model="newComment.content"
+            type="text"
+            class="form-control"
+            id="createcomment"
+            placeholder="Enter Comment"
+          />
+        </div>
+        <Button type="submit" class="btn btn-block btn-warning">Add</Button>
+      </form>
     </div>
-     <div>
+    <div>
       <comment
         class="task border rounded mb-3 square bg-info text-light"
         v-for="commentItem in comments"
@@ -28,38 +29,39 @@
 </template>
 
 <script>
-import Comment from "../components/Comment"
+import Comment from "../components/Comment";
 export default {
   name: "Task",
-  props: ["task",
-  "comment"],
+  props: ["task", "comment"],
   data() {
     return {
-      newComment: {
-      },
+      newComment: {},
     };
   },
-   mounted() {
+  mounted() {
     // this.$store.dispatch("getComments", this.task.id);
   },
   computed: {
-    comments(){
-    return this.task.comments
-    }
+    comments() {
+      return this.task.comments;
+    },
   },
   methods: {
-    addComment(currentTaskId){
+    addComment(currentTaskId) {
       // let currentList = this.$store.state.lists.find(list => list.id == currentListId)
-      this.$store.dispatch('addComment', {
+      this.$store.dispatch("addComment", {
         content: this.newComment.content,
         taskId: currentTaskId,
-      })
-      console.log('sent comment')
-    }
-
+      });
+      console.log("sent comment");
+    },
+    deleteTask(taskId) {
+      // let task = this.$store.state.tasks.find(task => commentId == task.comments.includes(comment.commentId))
+      this.$store.dispatch("deleteTask", taskId);
+    },
   },
   components: {
-    Comment
+    Comment,
   },
 };
 </script>

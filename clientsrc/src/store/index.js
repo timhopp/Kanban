@@ -83,15 +83,27 @@ export default new Vuex.Store({
       }
     },
 
-    addList({commit, dispatch}, listData) {
+    addList({ commit, dispatch }, listData) {
       api.post('lists', listData)
-      .then(serverList => {
-        dispatch('getListsByBoardId', listData.boardId)
-      })
+        .then(serverList => {
+          dispatch('getListsByBoardId', listData.boardId)
+        })
       console.log(this.state)
     },
-    //#endregion
 
+    deleteTask({ commit, dispatch }, taskId) {
+      api.delete('tasks/' + taskId)
+        .then(serverList => {
+          dispatch('getAllTasks')
+        })
+    },
+    //#endregion
+    deleteTasksByListId({ commit, dispatch }, listId) {
+      api.delete('tasks', listId)
+        .then(serverList => {
+          dispatch('getAllTasks')
+        })
+    },
 
     //#region -- LISTS --
     /*addList({ commit, dispatch }, newList) {
@@ -112,11 +124,11 @@ export default new Vuex.Store({
 
     //#endregion
     //#region --  TASKS --
-    addTask({commit, dispatch}, taskData) {
+    addTask({ commit, dispatch }, taskData) {
       api.post('tasks', taskData)
-      .then(serverList => {
-        dispatch('getAllTasks')
-      })
+        .then(serverList => {
+          dispatch('getAllTasks')
+        })
     },
     async getTasksByListId({ commit, dispatch }, id) {
       try {
@@ -126,8 +138,8 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    async getAllTasks({ commit, dispatch}){
-      try{
+    async getAllTasks({ commit, dispatch }) {
+      try {
         let res = await api.get('tasks')
         commit('setTasks', res.data)
       } catch (error) {
@@ -139,18 +151,25 @@ export default new Vuex.Store({
     //#endregion
 
     //#region --  COMMENTS --
-     addComment({ commit, dispatch}, payload){
-       api.post("tasks/" + payload.taskId + "/comments", payload)
-       .then(serverList => {
-        dispatch('getAllTasks')
-      })
+    addComment({ commit, dispatch }, payload) {
+      api.post("tasks/" + payload.taskId + "/comments", payload)
+        .then(serverList => {
+          dispatch('getAllTasks')
+        })
     },
 
-    deleteComment({commit, dispatch}, payload){
+    deleteList({ commit, dispatch }, payload) {
+      api.delete("lists/" + payload.listId)
+        .then(serverList => {
+          dispatch('getListsByBoardId', payload.boardId)
+        })
+    },
+
+    deleteComment({ commit, dispatch }, payload) {
       api.delete("tasks/" + payload.theTaskId + "/comments/" + payload.theCommentId)
-      .then(serverList => {
-        dispatch('getAllTasks')
-      })
+        .then(serverList => {
+          dispatch('getAllTasks')
+        })
     },
 
     // getComments({ commit, dispatch}, taskId){

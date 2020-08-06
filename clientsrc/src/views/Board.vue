@@ -1,8 +1,9 @@
 <template>
   <div class="board">
     <h1>{{board.title}}</h1>
+    <button @click="deleteBoard(board._id)" class="btn btn-danger">Delete</button>
     <form @submit.prevent="addList">
-      <div  class="form-group">
+      <div class="form-group">
         <label for="exampleInputEmail1">Create A List</label>
         <input
           v-model="newList.title"
@@ -30,9 +31,7 @@
 import List from "../components/List";
 export default {
   name: "board",
-  props: ["boardId",
-  "list"
-  ],
+  props: ["boardId", "list"],
   data() {
     return {
       newList: {},
@@ -51,12 +50,16 @@ export default {
   },
   methods: {
     addList() {
-      
       this.$store.dispatch("addList", {
         title: this.newList.title,
         boardId: this.$route.params.boardId,
       });
-      console.log(this.newList.title, this.$route.params.boardId)
+      console.log(this.newList.title, this.$route.params.boardId);
+    },
+
+    deleteBoard(boardId) {
+      this.$store.dispatch("deleteBoard", boardId);
+      this.$router.push({ name: "boards", path: "/boards" });
     },
   },
   components: {

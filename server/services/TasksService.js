@@ -52,6 +52,11 @@ class TasksService {
     );
   }
 
+  async deleteTasksByListId(id) {
+    return await dbContext.Tasks.findByIdAndDelete({ listId: id });
+
+  }
+
   async addComment(id, body) {
     return await dbContext.Tasks.findByIdAndUpdate(
       { _id: id },

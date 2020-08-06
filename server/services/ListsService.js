@@ -9,7 +9,7 @@ class ListsService {
 
 
   async getById(id) {
-    let data = await dbContext.Lists.findOne({ _id: id})
+    let data = await dbContext.Lists.findOne({ _id: id })
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this board")
     }
@@ -29,15 +29,15 @@ class ListsService {
     return data;
   }
 
-  async delete(id, userEmail) {
-    let data = await dbContext.Lists.findOneAndRemove({ _id: id, creatorEmail: userEmail });
+  async delete(id) {
+    let data = await dbContext.Lists.findOneAndRemove({ _id: id });
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this list");
     }
   }
 
   async getByBoardId(id) {
-  let data = await dbContext.Lists.find( {boardId: id} );
+    let data = await dbContext.Lists.find({ boardId: id });
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this board.");
     }
