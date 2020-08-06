@@ -1,10 +1,11 @@
 <template>
   <div class="List" dropzone="zone" @dragover.prevent @drop.prevent="moveTask()">
-    <div class="bg-light text-white border rounded p-3">
-      <div>
-        <h5>List{{list.title}}</h5>
+    <div class="bg-light text-success border rounded p-3">
+      <div class="row justify-content-between ml-2 mt-1 mr-3">
+        <h3>{{list.title}}</h3>
+        <button @click="deleteList(list._id)" class="btn btn-danger">Delete</button>
       </div>
-      <button @click="deleteList(list._id)" class="btn btn-danger">Delete</button>
+
       <form @submit.prevent="addTask(list.id)">
         <div class="form-group">
           <label for="exampleInputEmail1"></label>
@@ -16,11 +17,11 @@
             placeholder="Enter Task"
           />
         </div>
-        <Button type="submit" class="btn btn-block btn-warning">Add</Button>
+        <Button type="submit" class="btn btn-block btn-warning">Add Task</Button>
       </form>
       <div>
         <task
-          class="task border rounded mb-3 square bg-info text-light"
+          class="task rounded mb-3 square text-light"
           v-for="taskItem in tasks"
           :task="taskItem"
           :key="taskItem.id"

@@ -1,5 +1,5 @@
 <template>
-  <div class="Comment">
+  <div class="Comment p-2 m-2">
     <p>{{comment.content}}</p>
     <button @click="deleteComment(comment._id)" class="btn btn-danger">Delete</button>
   </div>
@@ -8,29 +8,25 @@
 
 <script>
 export default {
-  name: 'Comment',
-  props: [
-    "comment"
-  ],
-  data(){
-    return {}
+  name: "Comment",
+  props: ["comment"],
+  data() {
+    return {};
   },
-  computed:{},
-  methods:{
-    deleteComment(commentId){
-      debugger
+  computed: {},
+  methods: {
+    deleteComment(commentId) {
       // let task = this.$store.state.tasks.find(task => commentId == task.comments.includes(comment.commentId))
-      this.$store.dispatch('deleteComment', {
+      this.$store.dispatch("deleteComment", {
         theCommentId: commentId,
         theTaskId: this.comment.taskId,
-      })
-    }
+      });
+    },
   },
-  components:{}
-}
+  components: {},
+};
 </script>
 
 
 <style scoped>
-
 </style>

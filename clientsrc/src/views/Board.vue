@@ -1,7 +1,9 @@
 <template>
-  <div class="board">
-    <h1>{{board.title}}</h1>
-    <button @click="deleteBoard(board._id)" class="btn btn-danger">Delete</button>
+  <div class="container-fluid board text-primary">
+    <div class="row justify-content-between ml-2 mt-3 mr-3 px-2">
+      <h1>{{board.title}}</h1>
+      <button @click="deleteBoard(board._id)" class="btn btn-danger">Delete</button>
+    </div>
     <form @submit.prevent="addList">
       <div class="form-group">
         <label for="exampleInputEmail1">Create A List</label>
@@ -17,7 +19,7 @@
     </form>
     <div class="row">
       <list
-        class="car col-4 rounded mb-3 square text-light"
+        class="car col-3 rounded mb-3 square text-light"
         v-for="listItem in lists"
         :list="listItem"
         :key="listItem.id"

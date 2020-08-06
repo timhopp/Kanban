@@ -1,11 +1,14 @@
 <template>
   <div class="Task" @dragstart="moveTask()">
-    <div class="bg-secondary text-white border rounded">
-      <div>Task{{task.title}}</div>
-      <button @click="deleteTask(task._id)" class="btn btn-danger">Delete</button>
+    <div class="bg-secondary text-white border rounded mt-2">
+      <div class="row justify-content-between ml-2 mt-1 mr-3">
+        <h5 class="text-left">{{task.title}}</h5>
+        <button @click="deleteTask(task._id)" class="btn btn-danger">Delete</button>
+      </div>
+
       <form @submit.prevent="addComment(task.id)">
         <div class="form-group">
-          <label for="exampleInputEmail1">Add Comment</label>
+          <label for="exampleInputEmail1"></label>
           <input
             v-model="newComment.content"
             type="text"
@@ -19,7 +22,7 @@
     </div>
     <div>
       <comment
-        class="task border rounded mb-3 square bg-info text-light"
+        class="task rounded mb-3 square bg-secondary text-light"
         v-for="commentItem in comments"
         :comment="commentItem"
         :key="commentItem.id"
