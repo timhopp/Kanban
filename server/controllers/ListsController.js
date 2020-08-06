@@ -45,8 +45,7 @@ export class ListsController extends BaseController {
 
   async delete(req, res, next) {
     try {
-      req.body.creatorEmail = req.userInfo.email
-      await listsService.delete(req.params.id, req.userInfo.email)
+      await listsService.delete(req.params.id)
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }
