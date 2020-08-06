@@ -1,5 +1,5 @@
 <template>
-  <div class="List">
+  <div class="List" dropzone="zone" @dragover.prevent @drop.prevent="moveTask()">
     <div class="bg-light text-white border rounded p-3">
       <div>
         <h5>List{{list.title}}</h5>
@@ -24,6 +24,8 @@
           v-for="taskItem in tasks"
           :task="taskItem"
           :key="taskItem.id"
+          draggable="true"
+          @dragstart="reorderTask(task)"
         ></task>
       </div>
     </div>
@@ -71,6 +73,30 @@ export default {
         boardId: this.$route.params.boardId,
       });
       this.$store.dispatch("deleteTasksByListId", listId);
+    },
+    reorderTask(task, index) {
+      // console.log(item, index);
+      this.$store.dispatch("setTaskToMove", {
+        task: task,
+        oldList: this.list,
+      });
+    },
+    moveTask() {
+      //for first way
+      // let moveData = {
+      //   newRoomId: this.roomData.id,
+      //   oldRoomId: this.tempItem.oldRoom.id,
+      //   itemToMove: this.tempItem.item,
+      // };
+
+      let task = JSON.parse(event.dataTransfer.getData("data"));
+      let moveData = {
+        oldListId: event.dataTransfer.getData("list"),
+        taskToMove: task,
+        listId: this.list.id,
+      };
+      // console.log(moveData);
+      this.$store.dispatch("moveTask", moveData);
     },
   },
   components: {

@@ -21,7 +21,8 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: [],
-    tasks: []
+    tasks: [],
+    tempTask: {}
   },
   mutations: {
     setUser(state, user) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     setTasks(state, tasks) {
       state.tasks = tasks
     },
+    setItemToMove(state, taskData) {
+      state.tempTask = taskData
+    },
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -55,6 +59,20 @@ export default new Vuex.Store({
       } catch (err) {
         console.error(err)
       }
+    },
+    setTaskToMove({ commit, dispatch }, data) {
+      commit("setTaskToMove", data)
+    },
+    async moveTask({ commit, dispatch }, moveData) {
+      console.log(moveData);
+      try {
+        let res = await api.put("tasks/" + moveData.taskToMove.id, { listId: moveData.listId })
+      } catch (error) {
+        console.error(error)
+      }
+      commit("setItemToMove")
+      dispatch("getAllTasks")
+
     },
     //#endregion
 

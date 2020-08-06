@@ -1,5 +1,5 @@
 <template>
-  <div class="Task">
+  <div class="Task" @dragstart="moveTask()">
     <div class="bg-secondary text-white border rounded">
       <div>Task{{task.title}}</div>
       <button @click="deleteTask(task._id)" class="btn btn-danger">Delete</button>
@@ -58,6 +58,10 @@ export default {
     deleteTask(taskId) {
       // let task = this.$store.state.tasks.find(task => commentId == task.comments.includes(comment.commentId))
       this.$store.dispatch("deleteTask", taskId);
+    },
+    moveTask() {
+      event.dataTransfer.setData("data", JSON.stringify(this.task));
+      event.dataTransfer.setData("list", this.task.listId);
     },
   },
   components: {
