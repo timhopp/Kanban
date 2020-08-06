@@ -1,6 +1,6 @@
 <template>
-  <div class="home text-primary">
-    <img class="rounded" :src="user.picture" alt />
+  <div class="home text-primary mt-5">
+    <img class="rounded mb-3" :src="user.picture" alt />
     <h1>Welcome, {{user.name}}</h1>
   </div>
 </template>

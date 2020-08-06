@@ -1,5 +1,5 @@
 <template>
-  <div class="Comment p-2 m-2">
+  <div class="Comment p-2 row justify-content-between ml-2 mt-1 mr-3">
     <p>{{comment.content}}</p>
     <button @click="deleteComment(comment._id)" class="btn btn-danger">Delete</button>
   </div>
