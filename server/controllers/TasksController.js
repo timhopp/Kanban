@@ -1,6 +1,6 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
-import { tasksService } from "../services/tasksService";
+import { tasksService } from "../services/TasksService";
 import auth0provider from "@bcwdev/auth0provider";
 
 export class TasksController extends BaseController {

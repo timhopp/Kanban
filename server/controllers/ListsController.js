@@ -1,8 +1,8 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
-import { listsService } from "../services/listsService";
+import { listsService } from "../services/ListsService";
 import auth0provider from "@bcwdev/auth0provider";
-import { tasksService } from "../services/tasksService";
+import { tasksService } from "../services/TasksService";
 
 export class ListsController extends BaseController {
   constructor() {
