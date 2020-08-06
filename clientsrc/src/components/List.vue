@@ -1,6 +1,6 @@
 <template>
   <div class="List">
-    <div class="bg-dark text-white border rounded p-3">
+    <div class="bg-light text-white border rounded p-3">
       <div><h5>List{{list.title}}</h5></div>
       <form @submit.prevent="addTask(list.id)">
       <div  class="form-group">
