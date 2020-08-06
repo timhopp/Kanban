@@ -1,10 +1,10 @@
 <template>
   <div class="List">
-    <div class="bg-dark text-white border rounded">
+    <div class="bg-dark text-white border rounded p-3">
       <div><h5>List{{list.title}}</h5></div>
       <form @submit.prevent="addTask(list.id)">
       <div  class="form-group">
-        <label for="exampleInputEmail1">Add Task</label>
+        <label for="exampleInputEmail1"></label>
         <input
           v-model="newTask.title"
           type="text"

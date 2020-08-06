@@ -12,11 +12,11 @@
           placeholder="Enter List Name Here"
         />
       </div>
-      <Button type="submit" class="btn btn-block btn-warning">Submit List</Button>
+      <Button type="submit" class="btn btn-block btn-warning mb-2">Submit List</Button>
     </form>
     <div class="row">
       <list
-        class="car col-4 border rounded mb-3 square bg-info text-light"
+        class="car col-4 rounded mb-3 square text-light"
         v-for="listItem in lists"
         :list="listItem"
         :key="listItem.id"
