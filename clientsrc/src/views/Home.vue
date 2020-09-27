@@ -1,7 +1,14 @@
 <template>
   <div class="home text-primary mt-5">
-    <img class="rounded mb-3" :src="user.picture" alt />
-    <h1>Welcome, {{user.name}}</h1>
+    <div v-if="!user.email">
+      <h1>Please Log In</h1>
+    </div>
+    <div v-if="user.email">
+      <h1>Thanks For Logging In,</h1>
+      <button @click="goToBoards" class="btn btn-outline-warning">
+        Go To Boards
+      </button>
+    </div>
   </div>
 </template>
 
@@ -17,7 +24,11 @@ export default {
       return this.$store.state.user;
     },
   },
-  methods: {},
+  methods: {
+    goToBoards() {
+      this.$router.push({ name: "boards", path: "/boards" });
+    },
+  },
   components: {},
 };
 </script>

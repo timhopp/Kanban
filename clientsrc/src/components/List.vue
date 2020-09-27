@@ -1,9 +1,16 @@
 <template>
-  <div class="List" dropzone="zone" @dragover.prevent @drop.prevent="moveTask()">
-    <div class="bg-light text-success border rounded p-3">
+  <div
+    class="List"
+    dropzone="zone"
+    @dragover.prevent
+    @drop.prevent="moveTask()"
+  >
+    <div class="bg-dark text-white rounded p-3">
       <div class="row justify-content-between ml-2 mt-1 mr-3">
-        <h3>{{list.title}}</h3>
-        <button @click="deleteList(list._id)" class="btn btn-danger">Delete</button>
+        <h3>{{ list.title }}</h3>
+        <button @click="deleteList(list._id)" class="btn btn-outline-danger">
+          Delete
+        </button>
       </div>
 
       <form @submit.prevent="addTask(list.id)">
@@ -17,7 +24,9 @@
             placeholder="Enter Task"
           />
         </div>
-        <Button type="submit" class="btn btn-block btn-warning">Add Task</Button>
+        <Button type="submit" class="btn btn-block btn-outline-success"
+          >Add Task</Button
+        >
       </form>
       <div>
         <task
@@ -108,4 +117,14 @@ export default {
 
 
 <style scoped>
+.hover {
+  transition: all 0.3s ease;
+}
+.hover:hover {
+  box-shadow: 3px 10px #3b216b !important;
+  transform: translateY(-3px);
+}
+.pointer {
+  cursor: pointer;
+}
 </style>

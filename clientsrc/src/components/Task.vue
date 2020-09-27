@@ -1,10 +1,66 @@
 <template>
-  <div class="Task" @dragstart="moveTask()">
-    <div class="bg-secondary text-white border rounded mt-2">
+  <div
+    class="Task hover pointer"
+    @click="setCurrentTask(task.id)"
+    data-toggle="modal"
+    data-target="#taskModal"
+    @dragstart="moveTask()"
+  >
+    <div class="bg-secondary text-white rounded mt-2">
       <div class="row justify-content-between ml-2 mt-1 mr-3">
-        <h5 class="text-left">{{task.title}}</h5>
-        <button @click="deleteTask(task._id)" class="btn btn-danger">Delete</button>
+        <h5 class="text-left">{{ task.title }}</h5>
+        <button @click="deleteTask(task._id)" class="btn btn-outline-danger">
+          Delete
+        </button>
       </div>
+
+      <!-- Modal -->
+      <!-- NOTE How to get modal working with scroll? V-if wont work.. -->
+      <!-- <div
+        class="modal fade"
+        id="taskModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content bg-dark">
+            <div class="modal-header text-center">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h3 class="">Create A List</h3>
+              <form @submit.prevent="addList">
+                <div class="form-group"></div>
+                <button
+                  id="closeListModal"
+                  type="submit"
+                  class="btn btn-block btn-outline-success"
+                >
+                  Submit List
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-block btn-outline-danger"
+                  data-dismiss="modal"
+                  @click="clearListCreate()"
+                >
+                  Close
+                </button>
+              </form>
+            </div>
+            <div class="modal-footer"></div>
+          </div>
+        </div>
+      </div> -->
 
       <form @submit.prevent="addComment(task.id)">
         <div class="form-group">
@@ -17,7 +73,9 @@
             placeholder="Enter Comment"
           />
         </div>
-        <Button type="submit" class="btn btn-block btn-warning">Add</Button>
+        <Button type="submit" class="btn btn-block btn-outline-success"
+          >Add</Button
+        >
       </form>
     </div>
     <div>
@@ -66,6 +124,9 @@ export default {
       event.dataTransfer.setData("data", JSON.stringify(this.task));
       event.dataTransfer.setData("list", this.task.listId);
     },
+    setCurrentTask(taskId) {
+      this.$store.dispatch("currentTask", taskId);
+    },
   },
   components: {
     Comment,
@@ -75,4 +136,14 @@ export default {
 
 
 <style scoped>
+.hover {
+  transition: all 0.3s ease;
+}
+.hover:hover {
+  box-shadow: 3px 10px #6e42c1 !important;
+  transform: translateY(-3px);
+}
+.pointer {
+  cursor: pointer;
+}
 </style>
