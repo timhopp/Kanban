@@ -6,7 +6,7 @@
     data-target="#taskModal"
     @dragstart="moveTask()"
   >
-    <div class="bg-secondary text-white rounded mt-2">
+    <div class="bg-secondary text-white rounded mt-2 p-2">
       <div class="row justify-content-between ml-2 mt-1 mr-3">
         <h5 class="text-left">{{ task.title }}</h5>
         <button @click="deleteTask(task._id)" class="btn btn-outline-danger">
