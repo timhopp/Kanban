@@ -26,6 +26,7 @@ export default new Vuex.Store({
     tasks: [],
     tempTask: {},
     currentTask: {},
+    modalOpen: false,
   },
   mutations: {
     setUser(state, user) {
@@ -202,12 +203,14 @@ export default new Vuex.Store({
         });
     },
 
-    // getComments({ commit, dispatch}, taskId){
-    //   try{
-    //     let foundTask = this.$state.tasks.find(task => task.id == taskId)
-    //     let res = foundTask.comments
-    //   }
-    // }
+    getComments({ commit, dispatch, state }, taskId) {
+      try {
+        let foundTask = state.tasks.find((task) => task.id == taskId);
+        let res = foundTask.comments;
+      } catch (error) {
+        console.error(error);
+      }
+    },
 
     //#endregion
   },

@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Boards from "../views/Boards.vue";
 import Board from "../views/Board.vue";
+import currentTask from "../components/currentTask.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -24,6 +25,12 @@ export default new Router({
       path: "/boards/:boardId",
       name: "board",
       component: Board,
+      beforeEnter: authGuard,
+    },
+    {
+      path: "/currentTask/:taskId",
+      name: "currentTask",
+      component: currentTask,
       beforeEnter: authGuard,
     },
     {
