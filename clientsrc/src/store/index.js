@@ -26,6 +26,7 @@ export default new Vuex.Store({
     tasks: [],
     tempTask: {},
     currentTask: {},
+    currentTasksBoardId: "",
     modalOpen: false,
   },
   mutations: {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
     },
     setCurrentTask(state, currentTask) {
       state.currentTask = currentTask;
+    },
+    setcurrentTasksBoard(state, boardId) {
+      state.currentTasksBoardId = boardId;
     },
   },
   actions: {
@@ -128,6 +132,10 @@ export default new Vuex.Store({
     currentTask({ commit, dispatch, state }, taskId) {
       let currentTask = state.tasks.find((task) => task.id == taskId);
       commit("setCurrentTask", currentTask);
+    },
+
+    currentTasksBoard({ commit, dispatch }, boardId) {
+      commit("setcurrentTasksBoard", boardId);
     },
 
     //#region -- LISTS --
